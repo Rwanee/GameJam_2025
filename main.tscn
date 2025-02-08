@@ -1,3 +1,49 @@
-[gd_scene format=3 uid="uid://bu06o2ygcby3w"]
+[gd_scene load_steps=9 format=3 uid="uid://bu06o2ygcby3w"]
 
-[node name="main" type="Node2D"]
+[ext_resource type="Script" path="res://script/camera_movement.gd" id="1_svkj4"]
+[ext_resource type="Texture2D" uid="uid://dlbl6wrwt1b73" path="res://assets/autumn_field_puresky_4k.exr" id="2_ys1du"]
+[ext_resource type="PackedScene" uid="uid://bodiw7ramnb42" path="res://assets_map/stairs-narrow.glb" id="3_a5ihk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_h6j1j"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6svj5"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_us5pn"]
+panorama = ExtResource("2_ys1du")
+filter = false
+energy_multiplier = 0.5
+
+[sub_resource type="Sky" id="Sky_e1edb"]
+sky_material = SubResource("PanoramaSkyMaterial_us5pn")
+
+[sub_resource type="Environment" id="Environment_6pm7y"]
+background_mode = 2
+sky = SubResource("Sky_e1edb")
+
+[node name="MainScene" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_h6j1j")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+transform = Transform3D(0.99472, 0.0292098, 0.0983819, -0.0293522, 0.999569, 5.3551e-09, -0.0983395, -0.00288773, 0.995149, 2.78063, 2.84796, 4.74837)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D"]
+transform = Transform3D(0.99472, 0.0292098, 0.0983819, -0.0293522, 0.999569, 4.90368e-09, -0.0983395, -0.00288773, 0.995149, 2.78063, 2.84796, 4.74837)
+shape = SubResource("BoxShape3D_6svj5")
+disabled = true
+
+[node name="CaméraPivot" type="Node3D" parent="."]
+script = ExtResource("1_svkj4")
+
+[node name="Camera3D" type="Camera3D" parent="CaméraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -10)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6pm7y")
+
+[node name="stairs-narrow2" parent="." instance=ExtResource("3_a5ihk")]
+transform = Transform3D(-4.37087e-08, 0.0110478, 0.999939, 4.82911e-10, 0.999939, -0.0110478, -1, -8.47601e-16, -4.37114e-08, 1.19959, 0.437122, -0.056797)
