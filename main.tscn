@@ -1,15 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bu06o2ygcby3w"]
+[gd_scene load_steps=12 format=3 uid="uid://bu06o2ygcby3w"]
 
 [ext_resource type="Script" path="res://script/camera_movement.gd" id="1_svkj4"]
 [ext_resource type="Texture2D" uid="uid://dlbl6wrwt1b73" path="res://assets/autumn_field_puresky_4k.exr" id="2_ys1du"]
-[ext_resource type="PackedScene" uid="uid://bodiw7ramnb42" path="res://assets_map/stairs-narrow.glb" id="3_a5ihk"]
+[ext_resource type="MeshLibrary" uid="uid://dojhhinqy5org" path="res://tiles_plateforme_map.tres" id="3_gsa47"]
+[ext_resource type="Script" path="res://colision_gridmap.gd" id="4_etscj"]
 [ext_resource type="PackedScene" uid="uid://b0l03j17yert8" path="res://assets_map/figurine-cube-detailed.glb" id="4_p7gsa"]
-[ext_resource type="MeshLibrary" uid="uid://do8gluleb2cuj" path="res://assets/titles.tres" id="5_xtrx0"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_h6j1j"]
-size = Vector3(10, 1, 10)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_6svj5"]
+[ext_resource type="Script" path="res://grid_map_colision.gd" id="4_q1g3j"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_us5pn"]
 panorama = ExtResource("2_ys1du")
@@ -23,25 +19,12 @@ sky_material = SubResource("PanoramaSkyMaterial_us5pn")
 background_mode = 2
 sky = SubResource("Sky_e1edb")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_d8mkl"]
+size = Vector3(0.001, 0.517761, 11.6758)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hu13n"]
+
 [node name="MainScene" type="Node3D"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_h6j1j")
-skeleton = NodePath("")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-transform = Transform3D(0.99472, 0.0292098, 0.0983819, -0.0293522, 0.999569, 5.3551e-09, -0.0983395, -0.00288773, 0.995149, 2.78063, 2.84796, 4.74837)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D"]
-transform = Transform3D(0.99472, 0.0292098, 0.0983819, -0.0293522, 0.999569, 4.90368e-09, -0.0983395, -0.00288773, 0.995149, 2.78063, 2.84796, 4.74837)
-shape = SubResource("BoxShape3D_6svj5")
-disabled = true
-
-[node name="stairs-narrow2" parent="MeshInstance3D" instance=ExtResource("3_a5ihk")]
-transform = Transform3D(-4.37087e-08, 0.0110478, 0.999939, 4.82911e-10, 0.999939, -0.0110478, -1, -8.08351e-16, -4.37114e-08, 5, 1.5, 2)
-
-[node name="stairs-narrow2" parent="MeshInstance3D/stairs-narrow2" instance=ExtResource("3_a5ihk")]
-transform = Transform3D(0.992691, -0.0122949, -0.12006, 0.0123749, 0.999923, -7.92369e-05, 0.120052, -0.00140707, 0.992766, 1.03977, 0.998349, 0.251697)
 
 [node name="CaméraPivot" type="Node3D" parent="."]
 script = ExtResource("1_svkj4")
@@ -52,12 +35,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -10)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6pm7y")
 
-[node name="stairs-narrow2" parent="." instance=ExtResource("3_a5ihk")]
-transform = Transform3D(-4.37087e-08, 0.0110478, 0.999939, 4.82911e-10, 0.999939, -0.0110478, -1, -8.08351e-16, -4.37114e-08, 4.76592, 0.55987, 3.13379)
-
-[node name="figurine-cube-detailed2" parent="." instance=ExtResource("4_p7gsa")]
-transform = Transform3D(0.99281, 0.0843498, -0.0849309, -0.0812304, 0.995911, 0.0395434, 0.0879191, -0.0323601, 0.995602, 4.60465, 1.12949, 4.35719)
-
 [node name="GridMap" type="GridMap" parent="."]
-mesh_library = ExtResource("5_xtrx0")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0206113)
+mesh_library = ExtResource("3_gsa47")
 cell_size = Vector3(0.5, 0.25, 0.5)
+data = {
+"cells": PackedInt32Array(8, 65527, 36, 7, 65527, 36, 6, 65527, 36, 5, 65527, 36, 4, 65527, 36, 3, 65527, 36, 2, 65527, 36, 1, 65527, 36, 0, 65527, 36, 65535, 65527, 36, 65534, 65527, 36, 65533, 65527, 36, 65532, 65527, 36, 65531, 65527, 36, 65529, 65527, 36, 65528, 65527, 36, 65527, 65527, 36, 65527, 65529, 36, 65527, 65530, 36, 65527, 65531, 36, 65527, 65532, 36, 65527, 65533, 36, 65527, 65534, 36, 65527, 65535, 36, 65527, 2, 36, 65527, 3, 36, 65527, 4, 36, 65527, 5, 36, 65527, 6, 36, 65527, 7, 36, 65527, 8, 36, 65528, 7, 36, 65529, 7, 36, 65530, 7, 36, 65531, 7, 36, 65532, 7, 36, 65533, 7, 36, 65535, 7, 36, 65535, 8, 36, 65534, 8, 36, 65533, 8, 36, 65532, 8, 36, 65531, 8, 36, 65528, 8, 36, 65529, 8, 36, 65530, 8, 36, 0, 8, 36, 1, 8, 36, 2, 8, 36, 3, 8, 36, 4, 8, 36, 5, 8, 36, 6, 8, 36, 7, 8, 36, 8, 8, 36, 9, 8, 36, 9, 7, 36, 8, 7, 36, 8, 6, 36, 8, 5, 36, 8, 4, 36, 9, 3, 36, 9, 2, 36, 9, 1, 36, 9, 0, 36, 9, 65535, 36, 9, 65534, 36, 9, 65533, 36, 9, 65532, 36, 9, 65531, 36, 9, 65530, 36, 9, 65529, 36, 9, 65528, 36, 9, 65527, 36, 7, 65529, 36, 7, 65530, 36, 7, 65531, 36, 7, 65532, 36, 6, 65533, 36, 6, 65534, 36, 6, 65535, 36, 6, 0, 36, 5, 1, 36, 5, 2, 36, 5, 3, 36, 5, 4, 36, 5, 5, 36, 5, 6, 36, 5, 7, 36, 4, 7, 36, 3, 7, 36, 2, 6, 36, 1, 5, 36, 0, 4, 36, 0, 3, 36, 0, 2, 36, 0, 1, 36, 1, 1, 36, 2, 1, 36, 4, 1, 36, 6, 1, 36, 7, 1, 36, 7, 0, 36, 5, 65532, 36, 3, 65530, 36, 2, 65530, 36, 0, 65528, 36, 65535, 65528, 36, 65534, 65528, 36, 65534, 65529, 36, 65535, 65530, 36, 0, 65531, 36, 3, 65532, 36, 6, 65531, 36, 4, 65530, 36, 1, 65530, 36, 65535, 65531, 36, 65535, 65532, 36, 65535, 65533, 36, 1, 65534, 36, 2, 65534, 36, 3, 65534, 36, 1, 65533, 36, 65534, 65530, 36, 65532, 65530, 36, 65531, 65530, 36, 65531, 65531, 36, 65531, 65532, 36, 65532, 65533, 36, 65534, 65534, 36, 0, 65534, 36, 1, 65532, 36, 65532, 65529, 36, 65531, 65528, 36, 65530, 65529, 36, 65530, 65530, 36, 65530, 65531, 36, 65530, 65532, 36, 65530, 65534, 36, 65531, 65535, 36, 65532, 0, 36, 65533, 1, 36, 65533, 0, 36, 65532, 65535, 36, 65530, 65535, 36, 65529, 65535, 36, 65528, 65535, 36, 65528, 3, 36, 65529, 3, 36, 65530, 4, 36, 65532, 3, 36, 65533, 3, 36, 65534, 3, 36, 65534, 2, 36, 65532, 1, 36, 65531, 0, 36, 65531, 1, 36, 65530, 1, 36, 65530, 2, 36, 65531, 3, 36, 65532, 4, 36, 65532, 5, 36, 65533, 5, 36, 65534, 5, 36, 65534, 4, 36, 65535, 4, 36, 9, 5, 36, 9, 65526, 36, 8, 65526, 36, 7, 65526, 20, 6, 65526, 20, 5, 65526, 36, 4, 65526, 20, 3, 65526, 20, 2, 65526, 36, 1, 65526, 20, 0, 65526, 36, 65535, 65526, 20, 65534, 65526, 36, 65533, 65526, 20, 65532, 65526, 36, 65531, 65526, 36, 65528, 65526, 20, 65526, 65526, 36, 65526, 65528, 20, 65526, 65530, 36, 65526, 65532, 20, 65526, 0, 20, 65526, 5, 20, 65526, 7, 36, 65526, 9, 36, 65528, 9, 36, 65531, 9, 20, 65533, 9, 36, 0, 9, 36, 3, 9, 20, 6, 9, 20, 8, 9, 36, 9, 9, 36, 4, 5, 20, 65525, 65534, 23, 65525, 2, 23, 65525, 3, 23, 7, 9, 36, 5, 9, 36, 1, 9, 36, 2, 9, 36, 65534, 9, 36, 65532, 9, 36, 65530, 9, 36, 65526, 4, 36, 65526, 1, 36, 65526, 65535, 36, 65526, 65533, 36, 65526, 65529, 36, 65526, 65527, 36, 65529, 65526, 36, 65545, 9, 42)
+}
+script = ExtResource("4_q1g3j")
+metadata/_editor_floor_ = Vector3(0, 1, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GridMap"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GridMap/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.84899, 0.381805, 0.0606384)
+shape = SubResource("BoxShape3D_d8mkl")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76837e-07, 4.19741, 4.76837e-07)
+rotation_edit_mode = 2
+script = ExtResource("4_etscj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_hu13n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="figurine-cube-detailed3" parent="CharacterBody3D" instance=ExtResource("4_p7gsa")]
+transform = Transform3D(-1.99945, 0.0467703, -1.74798e-07, 0.0467703, 1.99945, 4.08876e-09, 1.74846e-07, 3.42448e-15, -2, 4.50394, 4.22932, 2.32138)
