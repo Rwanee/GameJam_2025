@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bu06o2ygcby3w"]
+[gd_scene load_steps=11 format=3 uid="uid://bu06o2ygcby3w"]
 
 [ext_resource type="Script" path="res://script/camera_movement.gd" id="1_svkj4"]
 [ext_resource type="Texture2D" uid="uid://dlbl6wrwt1b73" path="res://assets/autumn_field_puresky_4k.exr" id="2_ys1du"]
 [ext_resource type="PackedScene" uid="uid://bodiw7ramnb42" path="res://assets_map/stairs-narrow.glb" id="3_a5ihk"]
+[ext_resource type="PackedScene" uid="uid://b0l03j17yert8" path="res://assets_map/figurine-cube-detailed.glb" id="4_p7gsa"]
+[ext_resource type="MeshLibrary" uid="uid://do8gluleb2cuj" path="res://assets/titles.tres" id="5_xtrx0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_h6j1j"]
 size = Vector3(10, 1, 10)
@@ -24,7 +26,6 @@ sky = SubResource("Sky_e1edb")
 [node name="MainScene" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_h6j1j")
 skeleton = NodePath("")
 
@@ -36,6 +37,12 @@ transform = Transform3D(0.99472, 0.0292098, 0.0983819, -0.0293522, 0.999569, 4.9
 shape = SubResource("BoxShape3D_6svj5")
 disabled = true
 
+[node name="stairs-narrow2" parent="MeshInstance3D" instance=ExtResource("3_a5ihk")]
+transform = Transform3D(-4.37087e-08, 0.0110478, 0.999939, 4.82911e-10, 0.999939, -0.0110478, -1, -8.08351e-16, -4.37114e-08, 5, 1.5, 2)
+
+[node name="stairs-narrow2" parent="MeshInstance3D/stairs-narrow2" instance=ExtResource("3_a5ihk")]
+transform = Transform3D(0.992691, -0.0122949, -0.12006, 0.0123749, 0.999923, -7.92369e-05, 0.120052, -0.00140707, 0.992766, 1.03977, 0.998349, 0.251697)
+
 [node name="CaméraPivot" type="Node3D" parent="."]
 script = ExtResource("1_svkj4")
 
@@ -46,4 +53,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -10)
 environment = SubResource("Environment_6pm7y")
 
 [node name="stairs-narrow2" parent="." instance=ExtResource("3_a5ihk")]
-transform = Transform3D(-4.37087e-08, 0.0110478, 0.999939, 4.82911e-10, 0.999939, -0.0110478, -1, -8.47601e-16, -4.37114e-08, 1.19959, 0.437122, -0.056797)
+transform = Transform3D(-4.37087e-08, 0.0110478, 0.999939, 4.82911e-10, 0.999939, -0.0110478, -1, -8.08351e-16, -4.37114e-08, 4.76592, 0.55987, 3.13379)
+
+[node name="figurine-cube-detailed2" parent="." instance=ExtResource("4_p7gsa")]
+transform = Transform3D(0.99281, 0.0843498, -0.0849309, -0.0812304, 0.995911, 0.0395434, 0.0879191, -0.0323601, 0.995602, 4.60465, 1.12949, 4.35719)
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("5_xtrx0")
+cell_size = Vector3(0.5, 0.25, 0.5)
