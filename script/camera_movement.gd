@@ -22,6 +22,21 @@ const QUARTER_TURN = PI / 2               # 90 degrés en radians
 
 func _ready():
 	assert(camera != null, "Erreur : Pas de Camera3D trouvée comme enfant du Node3D")
+	
+	# Définit un angle initial de 45° (en radians)
+	current_angle = deg_to_rad(45)
+	target_angle = current_angle  # Assure que l'angle cible correspond à l'angle de départ
+
+	# Position initiale de la caméra pour un angle de 45 degrés
+	camera.position = Vector3(
+		current_zoom * 0.707,  # X : cos(45°) = 0.707
+		base_height,           # Y : Hauteur de base
+		current_zoom * 0.707   # Z : sin(45°) = 0.707
+	)
+	
+	# Faire regarder la caméra vers le centre
+	camera.look_at(Vector3.ZERO, Vector3.UP)
+
 	# Initialisation de la position de la caméra
 	update_camera_position()
 

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccp48kuet1o0k"]
+
+[ext_resource type="PackedScene" uid="uid://cfjr758yn02bd" path="res://ImageToStl.com_fox.fbx" id="1_slw0q"]
+
+[node name="ImageToStl_com_fox" instance=ExtResource("1_slw0q")]
