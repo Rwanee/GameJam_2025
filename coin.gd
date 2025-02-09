@@ -25,6 +25,7 @@ func _on_body_entered(body: Node3D) -> void:
 	set_collision_mask_value(1, false)
 	if Global.coins >= 3:
 		get_tree().change_scene_from_file()
+		$AudioStreamPlayer.stop()
 	$AnimationPlayer.play("bounce")
 	play_sound("coin")
 

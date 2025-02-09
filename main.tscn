@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bu06o2ygcby3w"]
+[gd_scene load_steps=18 format=3 uid="uid://bu06o2ygcby3w"]
 
 [ext_resource type="Script" path="res://script/camera_movement.gd" id="1_svkj4"]
 [ext_resource type="Texture2D" uid="uid://dlbl6wrwt1b73" path="res://assets/autumn_field_puresky_4k.exr" id="2_ys1du"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://midlge262rpu" path="res://f_coin.tscn" id="9_4n8hn"]
 [ext_resource type="PackedScene" uid="uid://c0lesmsltwdy7" path="res://coin.tscn" id="9_i7qft"]
 [ext_resource type="Script" path="res://f_coin.gd" id="10_pijk2"]
+[ext_resource type="AudioStream" uid="uid://cxrribxvqnpyy" path="res://OSTGAMEJAM.mp3" id="11_wv7j4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_us5pn"]
 panorama = ExtResource("2_ys1du")
@@ -94,3 +95,7 @@ transform = Transform3D(-0.635944, 0, -0.771736, 0, 1, 0, 0.771736, 0, -0.635944
 [node name="f_coin" parent="." instance=ExtResource("9_4n8hn")]
 transform = Transform3D(0.828647, 0, -0.559772, 0, 1, 0, 0.559772, 0, 0.828647, -2.77912, 1.4871, 3.72284)
 script = ExtResource("10_pijk2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_wv7j4")
+autoplay = true
