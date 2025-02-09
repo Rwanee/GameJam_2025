@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqu48lwb0i30k"]
+
+[ext_resource type="Script" path="res://win.gd" id="1_d3dwg"]
+[ext_resource type="Texture2D" uid="uid://dkm3q316yut21" path="res://win.webp" id="2_54bms"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d3dwg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 1918.0
+offset_bottom = 1077.0
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"
+
+[node name="Win" type="Sprite2D" parent="."]
+position = Vector2(959.5, 540.75)
+scale = Vector2(0.992188, 0.996759)
+texture = ExtResource("2_54bms")
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -12,8 +12,7 @@ func _on_body_entered(body):
 		player_lives += 1  # Ajoute une mort au compteur
 
 		if player_lives >= max_lives:
-			get_tree().change_scene_to_file("res://node_2d.tscn")
-			#restart_game()  # Relance le jeu si 3 morts
+			get_tree().change_scene_to_file("res://game_over.tscn")  # Relance le jeu si 3 morts
 		else:
 			body.global_transform.origin = teleport_position  # Téléporte le personnage
 

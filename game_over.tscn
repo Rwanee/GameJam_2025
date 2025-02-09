@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3 uid="uid://kdwtvtwne3uw"]
+
+[ext_resource type="Script" path="res://game_over.gd" id="1_475ao"]
+[ext_resource type="Texture2D" uid="uid://b3j4bcxg67qkc" path="res://game_over.webp" id="2_o31ae"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_475ao")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+
+[node name="GameOver" type="Sprite2D" parent="."]
+position = Vector2(964, 536.5)
+scale = Vector2(1.07254, 1.04395)
+texture = ExtResource("2_o31ae")
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
