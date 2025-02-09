@@ -12,6 +12,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	rotate_y(deg_to_rad(ROT_SPEED))
 
+func _on_body_entered(body: Node3D) -> void:
+	Global.coins += 1
+	set_collision_layer_value(3, false)
+	set_collision_mask_value(1, false)
+	if Global.coins >= 3:
+		get_tree().change_scene_from_file()
+	$AnimationPlayer.play("bounce")
 
-func _on_body_exited(body: Node3D) -> void:
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	queue_free()

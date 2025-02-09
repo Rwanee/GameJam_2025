@@ -1,25 +1,65 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0lesmsltwdy7"]
+[gd_scene load_steps=7 format=3 uid="uid://c0lesmsltwdy7"]
 
 [ext_resource type="Script" path="res://coin.gd" id="1_tvrk8"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ic8d0"]
-top_radius = 0.3
-bottom_radius = 0.3
-height = 0.15
+[ext_resource type="ArrayMesh" uid="uid://dmsbfvc16ybf0" path="res://assets/coin_new.res" id="2_wpgw6"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_jmkyb"]
 height = 0.15
 radius = 0.3
 
+[sub_resource type="Animation" id="Animation_qqjy2"]
+resource_name = "bounce"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.00137816, 0), Vector3(0, 1.24758, 0), Vector3(0, 0.812158, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8x4ky"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.00137816, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nxp4r"]
+_data = {
+"RESET": SubResource("Animation_8x4ky"),
+"bounce": SubResource("Animation_qqjy2")
+}
+
 [node name="coin" type="Area3D"]
+collision_layer = 4
 script = ExtResource("1_tvrk8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.0172431, 0.999851, 0, -0.999851, 0.0172431, 0, 0, 0, 1, 0, 0.00137816, 0)
-mesh = SubResource("CylinderMesh_ic8d0")
+transform = Transform3D(-1.13558, 0.035102, 0, -0.0195837, -2.03542, 0, 0, 0, 2.08, 0, 0.00137816, 0)
+mesh = ExtResource("2_wpgw6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_jmkyb")
 
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nxp4r")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
